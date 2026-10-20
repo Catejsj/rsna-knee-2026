@@ -1,0 +1,14 @@
+{
+  "id": "catejsj/rsna-submit-ensemble",
+  "title": "rsna-submit-ensemble",
+  "code_file": "submit_ensemble.py",
+  "language": "python",
+  "kernel_type": "script",
+  "is_private": true,
+  "enable_gpu": false,
+  "enable_internet": false,
+  "competition_sources": ["rsna-knee-abnormality-detection"],
+  "dataset_sources": ["catejsj/rsna-features-code", "catejsj/rsna-knee-finetuned"],
+  "kernel_sources": ["catejsj/rsna-finetune-batch"],
+  "model_sources": ["metaresearch/dinov2/pyTorch/small/1"]
+}

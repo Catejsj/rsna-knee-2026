@@ -1,0 +1,23 @@
+{
+  "id": "catejsj/rsna-finetune-chan",
+  "title": "rsna-finetune-chan",
+  "code_file": "finetune_chan.py",
+  "language": "python",
+  "kernel_type": "script",
+  "is_private": true,
+  "enable_gpu": true,
+  "enable_internet": true,
+  "competition_sources": [
+    "rsna-knee-abnormality-detection"
+  ],
+  "dataset_sources": [
+    "catejsj/rsna-knee-derived-labels",
+    "pilkwang/rsna-knee-llm-labels",
+    "marwanmath/resnet-50-radimagenet-marwan"
+  ],
+  "kernel_sources": [
+    "catejsj/rsna-cache-slices",
+    "catejsj/rsna-cache-eikonal"
+  ],
+  "model_sources": []
+}

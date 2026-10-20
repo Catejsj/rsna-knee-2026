@@ -1,0 +1,11 @@
+{
+  "id": "catejsj/rsna-cuda-probe",
+  "title": "rsna-cuda-probe",
+  "code_file": "cuda_probe.py",
+  "language": "python",
+  "kernel_type": "script",
+  "is_private": true,
+  "enable_gpu": true,
+  "enable_internet": true,
+  "model_sources": ["metaresearch/dinov2/pyTorch/small/1"]
+}

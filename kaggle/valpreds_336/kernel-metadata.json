@@ -1,0 +1,14 @@
+{
+  "id": "catejsj/rsna-valpreds-336",
+  "title": "rsna-valpreds-336",
+  "code_file": "valpreds_336.py",
+  "language": "python",
+  "kernel_type": "script",
+  "is_private": true,
+  "enable_gpu": true,
+  "enable_internet": true,
+  "competition_sources": ["rsna-knee-abnormality-detection"],
+  "dataset_sources": ["catejsj/rsna-knee-336"],
+  "kernel_sources": ["catejsj/rsna-cache-slices-336"],
+  "model_sources": ["metaresearch/dinov2/pyTorch/small/1", "metaresearch/dinov2/pyTorch/base/1"]
+}

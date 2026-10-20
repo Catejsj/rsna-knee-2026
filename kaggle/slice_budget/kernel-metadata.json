@@ -1,0 +1,25 @@
+{
+  "id": "catejsj/rsna-slice-budget",
+  "title": "rsna-slice-budget",
+  "code_file": "slice_budget.py",
+  "language": "python",
+  "kernel_type": "script",
+  "is_private": true,
+  "enable_gpu": true,
+  "enable_internet": true,
+  "competition_sources": [
+    "rsna-knee-abnormality-detection"
+  ],
+  "dataset_sources": [
+    "catejsj/rsna-knee-finetuned",
+    "catejsj/rsna-knee-radimagenet"
+  ],
+  "kernel_sources": [
+    "catejsj/rsna-cache-slices",
+    "catejsj/rsna-finetune-radimg-folds"
+  ],
+  "model_sources": [
+    "metaresearch/dinov2/pyTorch/small/1",
+    "metaresearch/dinov2/pyTorch/base/1"
+  ]
+}

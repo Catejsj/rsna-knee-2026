@@ -1,0 +1,12 @@
+{
+  "id": "catejsj/rsna-topology-features",
+  "title": "rsna-topology-features",
+  "code_file": "topology_features.py",
+  "language": "python",
+  "kernel_type": "script",
+  "is_private": true,
+  "enable_gpu": false,
+  "enable_internet": false,
+  "competition_sources": ["rsna-knee-abnormality-detection"],
+  "dataset_sources": ["catejsj/rsna-features-code", "catejsj/rsna-knee-derived-labels"]
+}

@@ -1,0 +1,23 @@
+{
+  "id": "catejsj/rsna-submit-ens7",
+  "title": "rsna-submit-ens7",
+  "code_file": "submit_ens7.py",
+  "language": "python",
+  "kernel_type": "script",
+  "is_private": true,
+  "enable_gpu": false,
+  "enable_internet": false,
+  "competition_sources": [
+    "rsna-knee-abnormality-detection"
+  ],
+  "dataset_sources": [
+    "catejsj/rsna-features-code",
+    "catejsj/rsna-knee-finetuned",
+    "catejsj/rsna-knee-radimg-v2",
+    "catejsj/rsna-knee-full"
+  ],
+  "model_sources": [
+    "metaresearch/dinov2/pyTorch/small/1",
+    "metaresearch/dinov2/pyTorch/base/1"
+  ]
+}

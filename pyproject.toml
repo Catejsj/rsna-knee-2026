@@ -1,0 +1,38 @@
+[project]
+name = "rsna-knee"
+version = "0.4.0"
+description = "RSNA 2026 Knee Abnormality Detection — report-derived labels + geometry-normalized imaging features"
+requires-python = ">=3.11"
+
+# Split on purpose. src/features.py and the label pipeline run inside an
+# offline Kaggle notebook, where only numpy/pandas/pydicom/scikit-learn are
+# guaranteed — so those stay minimal and stdlib-heavy. Everything under
+# [project.optional-dependencies] is local analysis only and never ships.
+dependencies = [
+    "numpy>=2.0",
+    "pandas>=2.2",
+    "pydicom>=2.4",
+    "scikit-learn>=1.5",
+]
+
+[project.optional-dependencies]
+# Local experiments: the multilingual sentence probe that showed embeddings
+# cannot separate a finding from its denial. Not needed to train or submit.
+analysis = [
+    "sentence-transformers>=5.0",
+    "torch>=2.4",
+    "transformers>=5.0",
+    "hdbscan>=0.8",
+    "scipy>=1.13",
+]
+
+[tool.rsna]
+# Settings that must match between training and inference. They are also
+# written into the model .npz so a submission cannot silently disagree with
+# the weights it loads; these are the defaults, not the authority.
+image_size = 64          # 224 for the DINOv2 path
+slices_per_plane = 24
+planes = ["Sagittal", "Coronal", "Axial"]
+crop_mm = 160.0          # acquired field of view spans ~70-320 mm
+slice_order = "physical" # along the slice normal, not filename order
+flip_to = "R"            # laterality: DICOM tag (49.7%) else inferred (97.1% agree)

@@ -1,0 +1,19 @@
+{
+  "id": "catejsj/rsna-cache-25d",
+  "title": "rsna-cache-25d",
+  "code_file": "cache_25d.py",
+  "language": "python",
+  "kernel_type": "script",
+  "is_private": true,
+  "enable_gpu": false,
+  "enable_internet": false,
+  "competition_sources": [
+    "rsna-knee-abnormality-detection"
+  ],
+  "dataset_sources": [
+    "catejsj/rsna-features-code",
+    "catejsj/rsna-knee-derived-labels"
+  ],
+  "kernel_sources": [],
+  "model_sources": []
+}

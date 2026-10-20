@@ -1,0 +1,14 @@
+{
+  "id": "catejsj/rsna-valpreds-radv2",
+  "title": "rsna-valpreds-radv2",
+  "code_file": "valpreds_radv2.py",
+  "language": "python",
+  "kernel_type": "script",
+  "is_private": true,
+  "enable_gpu": true,
+  "enable_internet": true,
+  "competition_sources": ["rsna-knee-abnormality-detection"],
+  "dataset_sources": ["catejsj/rsna-knee-radimg-v2"],
+  "kernel_sources": ["catejsj/rsna-cache-slices"],
+  "model_sources": []
+}

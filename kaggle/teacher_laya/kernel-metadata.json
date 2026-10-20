@@ -1,0 +1,18 @@
+{
+  "id": "catejsj/rsna-teacher-laya",
+  "title": "rsna-teacher-laya",
+  "code_file": "teacher_laya.py",
+  "language": "python",
+  "kernel_type": "script",
+  "is_private": true,
+  "enable_gpu": false,
+  "enable_internet": true,
+  "competition_sources": ["rsna-knee-abnormality-detection"],
+  "dataset_sources": [
+    "catejsj/rsna-knee-derived-labels",
+    "pilkwang/rsna-knee-llm-labels",
+    "stevenleehans/rsna-knee-llm-report-labels"
+  ],
+  "kernel_sources": [],
+  "model_sources": []
+}

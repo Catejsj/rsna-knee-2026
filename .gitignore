@@ -1,0 +1,19 @@
+# environments and caches
+.venv/
+__pycache__/
+*.pyc
+
+# competition data and anything derived from it -- never committed
+data/
+derived/
+external/
+kaggle/*/out/
+*.csv
+*.npy
+*.npz
+
+# weights and logs
+*.pt
+*.pth
+*.safetensors
+*.log

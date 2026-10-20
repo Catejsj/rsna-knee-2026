@@ -1,0 +1,14 @@
+{
+  "id": "catejsj/rsna-valpreds-effnet",
+  "title": "rsna-valpreds-effnet",
+  "code_file": "valpreds_effnet.py",
+  "language": "python",
+  "kernel_type": "script",
+  "is_private": true,
+  "enable_gpu": true,
+  "enable_internet": true,
+  "competition_sources": ["rsna-knee-abnormality-detection"],
+  "dataset_sources": ["catejsj/rsna-knee-effnet"],
+  "kernel_sources": ["catejsj/rsna-cache-slices"],
+  "model_sources": []
+}

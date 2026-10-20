@@ -1,0 +1,13 @@
+{
+  "id": "catejsj/rsna-dinov2-336",
+  "title": "rsna-dinov2-336",
+  "code_file": "dinov2_336.py",
+  "language": "python",
+  "kernel_type": "script",
+  "is_private": true,
+  "enable_gpu": false,
+  "enable_internet": false,
+  "competition_sources": ["rsna-knee-abnormality-detection"],
+  "dataset_sources": ["catejsj/rsna-features-code", "catejsj/rsna-knee-derived-labels"],
+  "model_sources": ["metaresearch/dinov2/pyTorch/small/1"]
+}

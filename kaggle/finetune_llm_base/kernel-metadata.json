@@ -1,0 +1,14 @@
+{
+  "id": "catejsj/rsna-finetune-llm-base",
+  "title": "rsna-finetune-llm-base",
+  "code_file": "finetune_llm_base.py",
+  "language": "python",
+  "kernel_type": "script",
+  "is_private": true,
+  "enable_gpu": true,
+  "enable_internet": true,
+  "competition_sources": ["rsna-knee-abnormality-detection"],
+  "dataset_sources": ["catejsj/rsna-knee-derived-labels", "pilkwang/rsna-knee-llm-labels"],
+  "kernel_sources": ["catejsj/rsna-cache-slices"],
+  "model_sources": ["metaresearch/dinov2/pyTorch/base/1"]
+}

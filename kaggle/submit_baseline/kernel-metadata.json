@@ -1,0 +1,17 @@
+{
+  "id": "catejsj/rsna-submit-baseline",
+  "title": "rsna-submit-baseline",
+  "code_file": "submit_baseline.py",
+  "language": "python",
+  "kernel_type": "script",
+  "is_private": true,
+  "enable_gpu": false,
+  "enable_internet": false,
+  "competition_sources": [
+    "rsna-knee-abnormality-detection"
+  ],
+  "dataset_sources": [
+    "catejsj/rsna-features-code",
+    "catejsj/rsna-knee-baseline-model"
+  ]
+}
