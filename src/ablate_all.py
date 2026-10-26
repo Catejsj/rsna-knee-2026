@@ -9,8 +9,8 @@ Four sources, all aligned by StudyInstanceUID:
 
 Three questions:
 
-1. **Did the 336px trade work?** It changed two things at once — resolution up,
-   planes 3->1 — so on its own it cannot be attributed. Running both encoders
+1. **Did the 336px trade work?** It changed two things at once: resolution up,
+   planes 3->1, so on its own it cannot be attributed. Running both encoders
    separately and together is what separates "336 is worse" from "one plane is
    worse".
 2. **Does combining the two encoders help?** They see different things; this is
@@ -18,7 +18,7 @@ Three questions:
 3. **Does either topology stream add anything** on top of a strong encoder?
 
 Blocked PCA throughout: each source gets its own component budget, then they
-are concatenated. A joint PCA lets the widest source drown the others — already
+are concatenated. A joint PCA lets the widest source drown the others: already
 measured (joint −0.002 vs blocked +0.005 for topology).
 
 Gold is the ruler. It called the graded-target change to within 0.001, while
@@ -96,7 +96,7 @@ def evaluate(names):
 
 
 COMBOS = [
-    ("emb224",),                      # v6 — the submitted model
+    ("emb224",),                      # v6: the submitted model
     ("emb336",),
     ("topo",),
     ("pers",),
@@ -125,7 +125,7 @@ best = max((c for c in results), key=lambda c: results[c][1])
 print(f"\nbest on gold: {' + '.join(best)}  ({results[best][1]:.4f})")
 
 print("\n" + "=" * 78)
-print("PER LABEL, gold — v6 vs best combination")
+print("PER LABEL, gold: v6 vs best combination")
 print("=" * 78)
 pb, pn = results[("emb224",)][2], results[best][2]
 print(f"{'label':<20}{'v6':>9}{'best':>9}{'delta':>9}")

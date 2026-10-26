@@ -5,7 +5,7 @@ things worse, because half-normalized is two conventions rather than one. The
 proposed fix infers the side from patient coordinates instead (LPS: +x is the
 patient's left), which are present on 100%.
 
-This does not assume the inference works — it measures it. Where the tag
+This does not assume the inference works: it measures it. Where the tag
 exists, we have ground truth for the inference itself, so:
 
     agreement on the tagged 49.7%  ->  whether to trust it on the other 50.3%
@@ -14,7 +14,7 @@ Anything below ~95% and the inference is not usable; a systematic disagreement
 (e.g. always wrong for one vendor) is more interesting than a random one, so
 the mismatches are broken down rather than just counted.
 
-Metadata only — `stop_before_pixels=True` skips the image data, so this reads
+Metadata only: `stop_before_pixels=True` skips the image data, so this reads
 one file per study and runs in minutes rather than the 74 the geometry sweep
 took.
 """
@@ -104,7 +104,7 @@ print(f"  inference says L/R: {Counter(both.inferred)}")
 
 bad = both[both.tag != both.inferred]
 if len(bad):
-    print(f"\n  {len(bad)} mismatches — are they systematic?")
+    print(f"\n  {len(bad)} mismatches: are they systematic?")
     print("  by manufacturer:")
     for m, c in Counter(bad.manufacturer).most_common(6):
         total = (both.manufacturer == m).sum()

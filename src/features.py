@@ -2,13 +2,13 @@
 
 Every kernel that turns DICOMs into a feature vector imports this. Before it
 existed, `load_slice` was copy-pasted into four scripts and `pick_series` into
-three — which the code graph surfaced and which is the real risk in this
+three, which the code graph surfaced and which is the real risk in this
 project: training and submission must compute features *identically*. If one
 copy drifts, the submission applies weights learned on one representation to a
 different one, produces plausible numbers, and errors nowhere.
 
 Constraints this file lives under:
-  * numpy + pydicom only — it runs inside an offline Kaggle notebook
+  * numpy + pydicom only: it runs inside an offline Kaggle notebook
   * no I/O beyond reading DICOMs, no globals, no config files
   * pure functions, so the sweep can call it with many settings cheaply
 

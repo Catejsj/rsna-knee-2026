@@ -1,6 +1,6 @@
 """Step 2: replace 64px thumbnails with DINOv2 embeddings.
 
-Everything so far has fed the model a 64x64 average of 24 slices — the crudest
+Everything so far has fed the model a 64x64 average of 24 slices: the crudest
 representation available, chosen to answer a question rather than to be good.
 It reached LB 0.669. Every public notebook above 0.809 uses DINOv2 instead.
 
@@ -15,7 +15,7 @@ std (384 -> 768); three planes give 2304 features.
 
 Two notes carried from earlier results:
 
-* The step-1 sweep found 224 px WORSE than 64 px — but that was raw pixels into
+* The step-1 sweep found 224 px WORSE than 64 px, but that was raw pixels into
   a linear model, where extra pixels are extra noise. An encoder is built to
   use fine detail, so resolution is re-tested here rather than inherited.
 * Judge this by the submission. Derived-label CV rated the three-plane change
@@ -24,7 +24,7 @@ Two notes carried from earlier results:
 
 Writes per-study embeddings so later head experiments skip the decode.
 
-RUNTIME NOTE — this is the CPU rerun. Kaggle assigned a Tesla P100 (compute
+RUNTIME NOTE: this is the CPU rerun. Kaggle assigned a Tesla P100 (compute
 capability sm_60) while its PyTorch build supports sm_70 and above, so CUDA
 raises `no kernel image is available` and the encoder falls back to CPU at
 ~14 slices/s. Measured on 40 studies: 1.58 s/study decode + 4.89 s/study
@@ -32,7 +32,7 @@ encode. `--accelerator nvidiaTeslaT4` was accepted but Kaggle assigned a P100
 anyway, so the GPU cannot be used at all.
 
 Consequences, applied here:
-  * run as a CPU kernel — the 12 h limit beats the GPU kernel's 9 h, and it
+  * run as a CPU kernel: the 12 h limit beats the GPU kernel's 9 h, and it
     costs no GPU quota, which the dead GPU would have burned for nothing
   * 16 slices per plane instead of 24. The step-1 sweep measured 12 vs 24 at
     0.6481 vs 0.6521, so the cost is small; 16 keeps most of it and brings the
@@ -101,7 +101,7 @@ def load_dinov2():
                 return m, "hub"
             except Exception as e:
                 print(f"  hub load failed at {w}: {str(e)[:90]}", flush=True)
-    raise RuntimeError("could not load DINOv2 — see the tree above")
+    raise RuntimeError("could not load DINOv2; see the tree above")
 
 
 model, kind = load_dinov2()
@@ -226,7 +226,7 @@ for j, l in enumerate(LABELS):
 
 print(f"\nMACRO CV AUC: {np.mean(aucs):.4f}   (v4 pixels: CV 0.7123 / LB 0.669)",
       flush=True)
-print("CV is not the ruler here — submit and read the leaderboard.", flush=True)
+print("CV is not the ruler here; submit and read the leaderboard.", flush=True)
 
 np.savez_compressed(
     "/kaggle/working/dinov2_model.npz",

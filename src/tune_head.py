@@ -2,9 +2,9 @@
 
 Two questions, and they are not equally trustworthy.
 
-**Targets (trustworthy).** `extract_rules.py` emits graded confidence — 0.90
+**Targets (trustworthy).** `extract_rules.py` emits graded confidence: 0.90
 strong evidence, 0.65 mentioned both ways, 0.25 never mentioned, 0.08 explicitly
-denied — and training then does `>= 0.5` and throws the gradation away. Since
+denied, and training then does `>= 0.5` and throws the gradation away. Since
 AUC reads only order, a graded target should carry more signal than a binary
 one. Every top public notebook grades rather than thresholds. This is a change
 to the *target*, not to model capacity, so derived-CV can be believed here.
@@ -94,7 +94,7 @@ def score(Z, mode, C, seed):
 
 
 print("=" * 78)
-print("A. TARGET ENCODING  (PCA-100, C=0.05 — the submitted config)")
+print("A. TARGET ENCODING  (PCA-100, C=0.05: the submitted config)")
 print("=" * 78)
 print(f"{'target':<26}{'derived CV':>13}{'gold (58)':>12}")
 Z100 = project(100, 0)
@@ -105,7 +105,7 @@ for mode in ("binary", "weighted", "graded"):
 
 print()
 print("=" * 78)
-print("B. CAPACITY  (best target from A) — derived-CV is NOT reliable here")
+print("B. CAPACITY  (best target from A): derived-CV is NOT reliable here")
 print("=" * 78)
 print(f"{'config':<26}{'derived CV':>13}{'gold (58)':>12}")
 for n_pca in (50, 100, 200, 400, None):

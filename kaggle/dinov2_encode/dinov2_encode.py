@@ -1,6 +1,6 @@
 """Step 2: replace 64px thumbnails with DINOv2 embeddings.
 
-Everything so far has fed the model a 64x64 average of 24 slices — the crudest
+Everything so far has fed the model a 64x64 average of 24 slices: the crudest
 representation available, chosen to answer a question rather than to be good.
 It reached LB 0.669. Every public notebook above 0.809 uses DINOv2 instead.
 
@@ -15,7 +15,7 @@ std (384 -> 768); three planes give 2304 features.
 
 Two notes carried from earlier results:
 
-* The step-1 sweep found 224 px WORSE than 64 px — but that was raw pixels into
+* The step-1 sweep found 224 px WORSE than 64 px, but that was raw pixels into
   a linear model, where extra pixels are extra noise. An encoder is built to
   use fine detail, so resolution is re-tested here rather than inherited.
 * Judge this by the submission. Derived-label CV rated the three-plane change
@@ -86,7 +86,7 @@ def load_dinov2():
                 return m, "hub"
             except Exception as e:
                 print(f"  hub load failed at {w}: {str(e)[:90]}", flush=True)
-    raise RuntimeError("could not load DINOv2 — see the tree above")
+    raise RuntimeError("could not load DINOv2; see the tree above")
 
 
 model, kind = load_dinov2()
@@ -211,7 +211,7 @@ for j, l in enumerate(LABELS):
 
 print(f"\nMACRO CV AUC: {np.mean(aucs):.4f}   (v4 pixels: CV 0.7123 / LB 0.669)",
       flush=True)
-print("CV is not the ruler here — submit and read the leaderboard.", flush=True)
+print("CV is not the ruler here; submit and read the leaderboard.", flush=True)
 
 np.savez_compressed(
     "/kaggle/working/dinov2_model.npz",

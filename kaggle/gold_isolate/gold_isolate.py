@@ -1,4 +1,4 @@
-"""Which Tier-1 change actually improved *true* skill — data, or planes?
+"""Which Tier-1 change actually improved *true* skill: data, or planes?
 
 The label-ceiling run refuted the "we are only fitting our own extractor"
 story: with more data, derived-label AUC rose +0.033 AND gold-label AUC rose
@@ -13,7 +13,7 @@ This isolates it. Features are read from the cached matrix, so this costs
 minutes instead of the 90-minute decode.
 
 Also reports a per-label gold breakdown and a bootstrap interval, because the
-gold set is 58 enriched studies with as few as 9 positives for some labels —
+gold set is 58 enriched studies with as few as 9 positives for some labels:
 the previous run's seed-to-seed spread understated the real uncertainty, and
 that matters more than the point estimates.
 """
@@ -104,7 +104,7 @@ def bootstrap_ci(per_gold, n=400, seed=0):
 
 
 print("\n" + "=" * 76)
-print("ISOLATING PLANES (all 4407 studies) — scored on derived AND on gold")
+print("ISOLATING PLANES (all 4407 studies): scored on derived AND on gold")
 print("=" * 76)
 print(f"{'planes':<16}{'vs DERIVED':>14}{'vs GOLD (58)':>16}{'gold 95% CI':>24}")
 N = len(X)

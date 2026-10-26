@@ -35,7 +35,7 @@ away -- the fit-the-extractor pattern, exactly as in v7.
 Submission for the fine-tuned model. Internet OFF, CPU.
 
 Fine-tuning lifted gold-58 from 0.6811 (frozen encoder + ridge, LB 0.742) to
-0.7353 — the largest measured gain of the project. This ships it.
+0.7353: the largest measured gain of the project. This ships it.
 
 Runs on CPU deliberately. Training needed `torch==2.6.0+cu118` to drive the
 P100, but that install needs internet, which submission kernels do not have.
@@ -43,7 +43,7 @@ CPU inference at ~14 slices/s over 1300 studies x 36 slices is ~0.93 h, well
 inside the 9 h budget, so there is no reason to take on the risk of shipping a
 CUDA wheel as a dataset.
 
-Everything about the representation — size, slice count, planes — is read from
+Everything about the representation (size, slice count, planes) is read from
 the checkpoint rather than restated, so this cannot disagree with what the
 weights were trained on. Geometry normalization comes from the same shared
 `rsna_features` module the cache was built with.

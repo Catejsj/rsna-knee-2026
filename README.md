@@ -1,4 +1,4 @@
-# RSNA 2026 Knee Abnormality Detection — an independent pipeline
+# RSNA 2026 Knee Abnormality Detection: an independent pipeline
 
 Code and write-up for an entry in the Kaggle **RSNA 2026 Knee Abnormality
 Detection** competition: predict 12 findings (ACL tear, meniscal tears,
@@ -15,7 +15,7 @@ Built from scratch rather than forked. **Final: 0.891 private / 0.910 public**
 the 12 answers. The rest come with a written radiology report, in about 12
 languages, and the test studies have no report at all.
 
-1. **Labels from text.** Turn each report into 12 graded scores — first with a
+1. **Labels from text.** Turn each report into 12 graded scores, first with a
    multilingual rules extractor, later with public LLM-read labels. These are
    the training targets.
 2. **Make every knee comparable.** Sort slices by their real position, crop the
@@ -36,7 +36,7 @@ leaderboard. Public and private scores moved together at every step:
 
 ## The central finding
 
-Every label source that reads the **report** — nine of them, including ours —
+Every label source that reads the **report** (nine of them, including ours)
 stops near 0.90 on the hand-labelled studies, because the hand labels were made
 from the **images** and reports leave things out. The winning team broke that
 ceiling by having LLM agents read the images themselves:
@@ -65,7 +65,7 @@ tools/                ship src/ modules to Kaggle; regenerate the figures
 
 ## What is not here, and why
 
-- **Competition data and anything derived from it** — MRI images, `train.csv`
+- **Competition data and anything derived from it**: MRI images, `train.csv`
   (which contains the reports), extracted label files, cached arrays, kernel
   outputs. The competition rules do not permit redistributing them, which is
   also why the figures are charts and diagrams rather than MRI slices.

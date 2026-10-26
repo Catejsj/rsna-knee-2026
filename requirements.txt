@@ -1,11 +1,11 @@
 # Pinned to what the local .venv (python3.11) actually has today.
 # Rebuild with:  python3.11 -m venv .venv && .venv/bin/pip install -r requirements.txt
 #
-# NOTE: pydicom is imported by src/features.py but is NOT installed locally —
+# NOTE: pydicom is imported by src/features.py but is NOT installed locally:
 # that module only ever runs inside Kaggle, where pydicom is preinstalled.
 # Install it here if you want to run the feature code on the sample DICOMs.
 
-# core — also what the Kaggle kernels rely on
+# core: also what the Kaggle kernels rely on
 numpy==2.4.6
 pandas==3.0.5
 scikit-learn==1.9.0
@@ -13,7 +13,7 @@ scipy==1.17.1
 joblib==1.5.3
 # pydicom>=2.4          # uncomment to run src/features.py locally
 
-# local analysis only — the multilingual negation probe. Never ships to Kaggle.
+# local analysis only: the multilingual negation probe. Never ships to Kaggle.
 sentence-transformers==5.7.0
 transformers==5.14.1
 torch==2.13.0

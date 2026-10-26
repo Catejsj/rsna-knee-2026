@@ -1,6 +1,6 @@
 """Stage A: decode every study once and cache the pixels. CPU kernel.
 
-With the GPU now usable (torch 2.6.0+cu118 on the P100 — see kaggle/cuda_probe),
+With the GPU now usable (torch 2.6.0+cu118 on the P100; see kaggle/cuda_probe),
 the encoder runs at 419 slices/s and **DICOM decoding is the bottleneck**, at
 ~1.2 s/study. Decoding inside the training loop would cost 90 minutes per epoch
 for work that never changes.

@@ -10,7 +10,7 @@
 Graded targets *lower* derived CV and *raise* gold. That is the expected shape,
 not a contradiction: derived CV scores agreement with the binarized labels, so
 training on those labels optimizes that metric directly. Gold is the honest
-measure and prefers the graded target — as do all the top public notebooks,
+measure and prefers the graded target, as do all the top public notebooks,
 on the reasoning that AUC reads only order, so a severity score carries more
 information than a 0/1.
 
@@ -20,7 +20,7 @@ sigmoid is monotonic, so it cannot change AUC and the existing inference code
 needs no modification.
 
 PCA width is set to 200 (gold's best, 0.6832) but honestly that choice sits
-inside the noise of a 58-study set — the target change is the real hypothesis
+inside the noise of a 58-study set: the target change is the real hypothesis
 being tested, and one submission is what settles it.
 
 Usage:  .venv/bin/python src/build_graded_model.py
@@ -88,7 +88,7 @@ for j, l in enumerate(LABELS):
 print(f"\nMACRO derived {np.mean(d_aucs):.4f}   MACRO gold {np.mean(g_aucs):.4f}")
 print("v5 submitted (binary/PCA-100): derived 0.7892, gold 0.6534, LB 0.713")
 
-# col_mean carries over unchanged — it is the training-set imputation for a
+# col_mean carries over unchanged: it is the training-set imputation for a
 # plane a study lacks, and the embeddings were built with it.
 os.makedirs(OUT_DIR, exist_ok=True)
 np.savez_compressed(

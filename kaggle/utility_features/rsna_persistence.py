@@ -34,7 +34,7 @@ been punished, so rotations are merged and only a few geometries are used.
 import numpy as np
 from scipy.spatial import Delaunay
 
-# 8 neighbours, clockwise from top-left — the order the thesis specifies
+# 8 neighbours, clockwise from top-left: the order the thesis specifies
 _OFF = [(-1, -1), (-1, 0), (-1, 1), (0, 1), (1, 1), (1, 0), (1, -1), (0, -1)]
 
 
@@ -68,7 +68,7 @@ def landmarks(image, lam, max_points=600, rng=None):
 
     Subsampled to `max_points` because Delaunay cost grows with n and, more
     importantly, so the descriptor does not silently encode "how many landmarks
-    there were" — which is a texture-density feature, not a topological one.
+    there were", which is a texture-density feature, not a topological one.
     """
     codes = lbp_code(image)
     wanted = UNIFORM_BY_LAMBDA.get(lam, [])

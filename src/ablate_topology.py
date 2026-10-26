@@ -3,7 +3,7 @@
 Three arms per label: embeddings alone, topology alone, and both. Scored
 against derived labels (a training diagnostic only) and against the 58
 radiologist-labeled studies, which is the ruler that has actually tracked the
-leaderboard — it called the graded-target change to within 0.001.
+leaderboard: it called the graded-target change to within 0.001.
 
 Two fusion strategies, because they are not equivalent:
 
@@ -99,7 +99,7 @@ for name, Z in ARMS.items():
     print(f"{name:<26}{d:>11.4f}{g:>12.4f}{delta:>15}")
 
 print("\n" + "=" * 74)
-print("PER LABEL, gold — where does topology actually help?")
+print("PER LABEL, gold: where does topology actually help?")
 print("=" * 74)
 be = results["embeddings only (200)"][2]
 bt = results["topology only (64)"][2]

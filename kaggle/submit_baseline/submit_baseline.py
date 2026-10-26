@@ -1,11 +1,11 @@
 """Tier-1 submission: hidden scans -> submission.csv. Internet OFF.
 
-v3 — matches train_baseline v3: all three planes, 64px x 24 slices, PCA-100 +
+v3, matching train_baseline v3: all three planes, 64px x 24 slices, PCA-100 +
 per-label logistic regression. The model file carries its own config (size,
 slices, planes, imputation means), so this script cannot disagree with how the
 weights were fitted; nothing about the representation is restated here.
 
-Feature code is imported from the shared rsna_features module — the identical
+Feature code is imported from the shared rsna_features module: the identical
 module the training kernel used. Both previously carried their own copy, which
 is the failure this guards against: a drifted copy applies weights learned on
 one representation to a different one, produces plausible numbers, and errors

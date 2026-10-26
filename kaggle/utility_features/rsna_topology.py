@@ -1,7 +1,7 @@
 # GENERATED FILE - DO NOT EDIT.
 # Copied from src/ by tools/sync_utility.py.
 # Edit the source, then re-run the sync. Source sha256: 27c25ee10032dbcb
-"""Topological features for knee MRI slices — Betti curves, numpy + scipy only.
+"""Topological features for knee MRI slices: Betti curves, numpy + scipy only.
 
 Why not a TDA library: the submission notebook runs with internet disabled, and
 `gudhi` / `giotto-tda` are not standard on Kaggle. Shipping wheels is possible
@@ -18,8 +18,8 @@ persistence diagram summarizes, at a fraction of the cost and with no
 dependencies.
 
 Vectorization is deliberately small. Every capacity increase measured on this
-project has been punished — 224px lost to 64px, PCA-300 lost to PCA-100,
-no-PCA lost badly — and persistence images would add thousands of columns to a
+project has been punished: 224px lost to 64px, PCA-300 lost to PCA-100,
+no-PCA lost badly, and persistence images would add thousands of columns to a
 4407-row problem. Betti curves give ~30-60 numbers per plane.
 
 Why this should carry signal for knees: effusion and Baker's cysts are bright
@@ -58,7 +58,7 @@ def betti_numbers(mask):
 def betti_curves(image, n_thresholds=16, direction="superlevel"):
     """Betti curves over a threshold sweep of a [0,1] image.
 
-    direction "superlevel" thresholds `image >= t` — bright structures, which
+    direction "superlevel" thresholds `image >= t`: bright structures, which
     is where fluid lives on the fluid-sensitive sequences we select.
     "sublevel" (`image <= t`) picks out dark structures instead.
 

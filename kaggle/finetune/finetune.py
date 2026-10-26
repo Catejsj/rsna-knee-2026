@@ -3,7 +3,7 @@
 This is the structural gap to the public notebooks above 0.80. The 0.809
 baseline unfreezes the last N encoder blocks, trains with AdamW + OneCycleLR +
 AMP, and pools slices with a per-diagnosis attention head. We froze the encoder
-and used mean+std pooling with a linear head — not because that was judged
+and used mean+std pooling with a linear head, not because that was judged
 better, but because Kaggle's PyTorch could not drive the P100 and training
 looked impossible. It can: `torch==2.6.0+cu118` carries sm_60 kernels, measured
 at 163 img/s forward+backward, so 10 epochs costs under 2 h.
@@ -13,8 +13,8 @@ what makes repeated training runs affordable.
 
 Head: one learned query per diagnosis attends over the 36 slice embeddings of a
 study (3 planes x 12 slices). Different findings live in different slices and
-different planes — effusion in the suprapatellar recess, meniscal tears at the
-posterior horn — so a single mean over slices dilutes each one with 35 others.
+different planes: effusion in the suprapatellar recess, meniscal tears at the
+posterior horn, so a single mean over slices dilutes each one with 35 others.
 Attention lets each diagnosis choose where to look.
 
 Targets are the graded severity scores, not binarized labels: graded was worth

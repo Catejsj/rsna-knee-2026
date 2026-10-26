@@ -13,10 +13,10 @@ submission notebook has no internet and gudhi/giotto-tda are not standard on
 Kaggle. In 2D, b0 comes from connected components, chi from counting
 pixels/edges/2x2 blocks, and b1 = b0 - chi. Validated locally against shapes
 with known topology (disk, annulus, two disks, disk with two holes, three
-rings) — all exact.
+rings): all exact.
 
 Output: 128 features per plane (4 curves x 16 thresholds, pooled mean and max
-across slices), 384 for three planes. Small on purpose — every capacity
+across slices), 384 for three planes. Small on purpose: every capacity
 increase measured on this project has been punished.
 """
 import os

@@ -1,7 +1,7 @@
 """Ensemble search including v7, plus a free TTA measurement. GPU, ~15 min.
 
 The config batch searched subsets of {A,B,C,D} and found A+C at gold 0.7347,
-just under v7's 0.7353 — and concluded ensembling doesn't help. But **v7 was
+just under v7's 0.7353, and concluded ensembling doesn't help. But **v7 was
 never in the pool**: the batch run had no v7 validation predictions to average,
 so the search could only combine models that were each individually weaker than
 v7. Averaging the two weakest-but-decent members recovered almost the whole gap,
@@ -84,7 +84,7 @@ for p in sorted(glob.glob("/kaggle/input/**/model_*.pt", recursive=True)):
 print("\ncheckpoints found:", flush=True)
 for k, v in CKPTS.items():
     print(f"  {k:<12} {v}", flush=True)
-assert "v7" in CKPTS, "v7 checkpoint missing — attach catejsj/rsna-knee-finetuned"
+assert "v7" in CKPTS, "v7 checkpoint missing; attach catejsj/rsna-knee-finetuned"
 assert len(CKPTS) >= 2, "need at least two models to ensemble"
 
 meta = np.load(_idx[0], allow_pickle=True)
@@ -101,7 +101,7 @@ gold_mask = np.array([u in gold_ids for u in ids])
 Y_gold = np.zeros((len(ids), len(LABELS)), dtype=np.int64)
 Y_gold[gold_mask] = gold_df.loc[ids[gold_mask], LABELS].values.astype(int)
 
-# identical to finetune.py and finetune_batch.py — do not change, the whole
+# identical to finetune.py and finetune_batch.py; do not change, the whole
 # point is that these predictions are comparable to the batch's
 rng = np.random.default_rng(0)
 order = rng.permutation(len(ids))
@@ -226,7 +226,7 @@ for tta in (False, True):
     src = {k: (plain[k] + flipped[k]) / 2 for k in names} if tta else plain
     print("\n" + "=" * 66)
     print(f"ENSEMBLES {'WITH TTA' if tta else 'no TTA'} "
-          f"— v7 alone = {gold_auc(src['v7']):.4f}")
+          f"(v7 alone = {gold_auc(src['v7']):.4f})")
     print("=" * 66)
     scored = []
     for k in range(1, len(names) + 1):
@@ -249,7 +249,7 @@ print(f"v7 alone, no TTA: {'':<34}{gold_auc(plain['v7']):.4f}")
 print("=" * 66)
 print("gold-58 noise is +/-0.05 on the macro; a margin under that is not a")
 print("result. 31 combinations searched against 58 studies WILL produce a")
-print("winner by chance — prefer the simplest one whose margin is real.")
+print("winner by chance; prefer the simplest one whose margin is real.")
 
 winner = best_tta if best_tta[0] > best_plain[0] else best_plain
 use_tta = best_tta[0] > best_plain[0]

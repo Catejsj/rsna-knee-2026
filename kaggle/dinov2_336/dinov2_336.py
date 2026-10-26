@@ -1,4 +1,4 @@
-"""DINOv2 at 336 px, one plane, patch tokens — trading planes for resolution.
+"""DINOv2 at 336 px, one plane, patch tokens: trading planes for resolution.
 
 The measurement that motivates this: a DINOv2 ViT-S/14 patch token covers
 
@@ -18,7 +18,7 @@ Two changes, each independently justified:
 
 Paid for by dropping to sagittal only. Three planes were measured to add
 **zero** real skill (gold +0.000 while derived CV rose +0.032), so this trades
-something known worthless for something physically motivated — and comes out
+something known worthless for something physically motivated, and comes out
 *faster* than the current model: ~1.55 h inference against 2.5 h.
 
 Also saves **per-slice** embeddings this time. The previous encode kept only
@@ -26,7 +26,7 @@ the pooled mean+std, which is why attention pooling would otherwise cost a
 full 8 h re-encode. Same compute, and it makes that class of experiment free.
 
 CPU kernel by design: Kaggle assigns a P100 (sm_60) that its own PyTorch build
-cannot use, so the GPU is dead weight — and a CPU kernel gets 12 h instead of 9
+cannot use, so the GPU is dead weight, and a CPU kernel gets 12 h instead of 9
 and burns no GPU quota.
 """
 import os

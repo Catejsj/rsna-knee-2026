@@ -1,12 +1,12 @@
 """Train the model. Features come from the shared rsna_features module.
 
-v4 — v3 plus geometry normalization: slices ordered along the slice normal
+v4 is v3 plus geometry normalization: slices ordered along the slice normal
 (was filename order, i.e. arbitrary), centre-cropped to a fixed 160 mm of
 anatomy (the acquired field of view ranges 70-320 mm), and every knee mirrored
 to face the same way.
 
 Laterality comes from the DICOM tag where present (49.7% of studies) and from
-patient coordinates otherwise — the sign of the image-centre x in LPS space.
+patient coordinates otherwise: the sign of the image-centre x in LPS space.
 That inference agrees with the tag on 97.1% of the 2189 studies that carry one,
 and is available on 100%. Flipping only the tagged half made things *worse*
 (compartment gold 0.571 -> 0.534) because half-normalized is two conventions
@@ -32,7 +32,7 @@ capacity overfits. Add information, not parameters.
 src/features.py by tools/sync_utility.py. The submission kernel imports the
 identical module, so train and inference cannot drift.
 
-Model saves as plain numpy arrays — no sklearn-version dependency downstream.
+Model saves as plain numpy arrays: no sklearn-version dependency downstream.
 """
 import os
 import time

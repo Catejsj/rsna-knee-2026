@@ -24,7 +24,7 @@ import sys
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 DEST_DIR = ROOT / "kaggle" / "utility_features"
-# (source in src/, name on Kaggle) — both ship in one dataset
+# (source in src/, name on Kaggle): both ship in one dataset
 MODULES = [("features.py", "rsna_features.py"),
            ("topology.py", "rsna_topology.py"),
            ("persistence.py", "rsna_persistence.py"),

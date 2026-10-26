@@ -1,12 +1,12 @@
 """DINOv2 submission: hidden scans -> submission.csv. Internet OFF.
 
-Same pipeline as the training encode, which is the point — geometry
+Same pipeline as the training encode, which is the point: geometry
 normalization and the encoder both come from code the training run used, and
 every setting (size, slices, planes, PCA, weights) is read out of the model
 file rather than restated here, so this cannot silently disagree with what the
 weights were fitted on.
 
-RUNTIME — this runs on CPU by design. Kaggle assigns a Tesla P100 (sm_60) while
+RUNTIME: this runs on CPU by design. Kaggle assigns a Tesla P100 (sm_60) while
 its PyTorch build supports sm_70+, so CUDA raises `no kernel image is
 available`; `--accelerator nvidiaTeslaT4` was accepted but still yielded a
 P100. Measured encode rate is ~14 slices/s, and the training run took 6.81
@@ -20,7 +20,7 @@ Efficiency-track note: at ~2.5 h the runtime term `RuntimeSeconds/32400` is
 not an efficiency one. A cheaper variant (fewer slices, one plane) would be
 needed to contest that track.
 
-Contract: one row per StudyInstanceUID in test.csv ALWAYS — a study that fails
+Contract: one row per StudyInstanceUID in test.csv ALWAYS; a study that fails
 to decode falls back to the training prior rather than vanishing.
 """
 import os

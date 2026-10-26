@@ -1,7 +1,7 @@
 """Train four configurations and ensemble them. GPU, ~3 h.
 
 v7 (LB 0.795) peaked at **epoch 4 of 8** on gold, then loss kept falling while
-gold flattened — the model getting better at reproducing our label extractor
+gold flattened: the model getting better at reproducing our label extractor
 rather than at reading knees. But epoch 4 sat mid-schedule, with OneCycle still
 annealing toward epoch 8, so the learning rate was high and the weights never
 settled. Sizing the schedule to the length we actually want is the first thing
@@ -16,7 +16,7 @@ Four configurations, each with its own seed:
 
 Then the part we have never tried: **averaging their predictions**. Every
 earlier "combination" experiment concatenated features, which is a different
-operation — the models compete for PCA components. Averaging lets each keep its
+operation: the models compete for PCA components. Averaging lets each keep its
 own decision surface, and it is the most dependable technique in competitive
 ML. All 2^4 - 1 subsets are scored so the best combination is chosen on
 evidence rather than assumed to be "all of them".
@@ -223,7 +223,7 @@ for name, epochs, unfreeze, seed in CONFIGS:
         print(f"{name:<12} FAILED: {str(e)[:80]}", flush=True)
 
 print("\n" + "=" * 62)
-print("ENSEMBLES (averaged predictions) — v7 single model was gold 0.7353")
+print("ENSEMBLES (averaged predictions): v7 single model was gold 0.7353")
 print("=" * 62)
 best, best_g = None, -1
 names = list(results)

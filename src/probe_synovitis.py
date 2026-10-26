@@ -12,7 +12,7 @@ Two views, because each is blind where the other sees:
       Synovitis but our extractor found no mention, print the report. Small
       (27 positives) but it is the only ground truth in existence.
 
-  [B] All 4407 reports. Rank vocabulary by lift — how much more often a token
+  [B] All 4407 reports. Rank vocabulary by lift: how much more often a token
       appears in reports our extractor calls Synovitis-positive than in the
       rest. Terms we already match will top the list, which is the control;
       what matters is the unmatched terms that ride alongside them, since those
@@ -66,7 +66,7 @@ for r in missed[:12]:
     print(f"  - {txt[:320]}")
     print()
 
-# a matched positive, for contrast — shows what a hit looks like
+# a matched positive, for contrast: shows what a hit looks like
 hit = [r for _, r in pos.iterrows() if matches(r["Report"])]
 if hit:
     print(f"  (for contrast, {len(hit)} gold positives DO match, e.g. via "
@@ -110,5 +110,5 @@ for lift, w, k, o in rows[:45]:
     print(f"  {w:<28}{lift:>8.1f}{k:>7}{o:>8}   {'yes' if seen else '<-- NEW'}")
 
 print(f"\n{len(rows)} tokens with lift > 3. 'NEW' ones co-occur with the "
-      f"finding\nbut are not matched — candidate synonyms to verify by reading "
+      f"finding\nbut are not matched: candidate synonyms to verify by reading "
       f"context.")

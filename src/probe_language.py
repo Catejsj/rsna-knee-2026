@@ -9,7 +9,7 @@ to a middling Latin number that looks like noise rather than a hole.
 
 Language is identified by stopwords and orthography, which is crude but does not
 need a dependency and is unambiguous at report length. Then, per language, the
-fraction of reports where the extractor found *nothing at all* — a report where
+fraction of reports where the extractor found *nothing at all*: a report where
 all twelve labels come back "not mentioned" is almost always a coverage failure,
 since a knee MRI report says something about the knee.
 

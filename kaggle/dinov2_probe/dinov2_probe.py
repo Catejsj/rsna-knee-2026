@@ -1,6 +1,6 @@
 """Why is the DINOv2 encode taking >6 h? Measure it on 40 studies.
 
-The full run has no visibility — Kaggle releases logs only on completion — so
+The full run has no visibility (Kaggle releases logs only on completion), so
 this reproduces the identical setup on a small sample and times the two halves
 separately. It answers the question the big run cannot:
 

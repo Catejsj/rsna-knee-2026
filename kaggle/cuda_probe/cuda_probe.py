@@ -14,7 +14,7 @@ with internet enabled can install one. If that works:
   * **fine-tuning the last encoder blocks becomes possible**, which is the
     single structural difference between our pipeline and the ones above 0.8
 
-Inference does not need this — the submission notebook has no internet, and CPU
+Inference does not need this: the submission notebook has no internet, and CPU
 inference already fits the 9 h budget. Only training needs the GPU.
 
 Measures three things: does CUDA initialise, is a forward pass correct, and how
