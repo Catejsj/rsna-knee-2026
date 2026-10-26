@@ -1,15 +1,17 @@
 # Knee MRI from report-derived labels: what moved the score, and what did not
 
 **RSNA 2026 Knee Abnormality Detection** — an independent pipeline, built from
-scratch rather than forked, scoring **0.910 public LB**.
+scratch rather than forked. **Final: 0.891 private / 0.910 public**, rank
+**4,340 of 6,425**. The winning team scored 0.960 private.
 
 This writes up roughly 30 measured experiments: what moved the score, what did
 not, and the measurement discipline that made the difference between the two
 legible. The negative results are reported with the same detail as the
 positive ones, because most of them are reusable.
 
-> Written before the private leaderboard was revealed; all scores below are
-> public-LB or gold-58.
+> Scores are gold-58 (the 58 hand-labelled training studies) unless marked
+> public or private LB. §7 compares this pipeline with the winning solution,
+> which shows what the measurements here got right and what they missed.
 
 ---
 
@@ -63,11 +65,7 @@ wrong outright (DINOv2-base vs small), which is what set that threshold.
 
 ## 3. The pipeline
 
-```
-DICOM -> geometry normalisation -> 3 planes x 12 slices @224px
-      -> encoder -> per-finding attention head -> 12 probabilities
-                                 -> probability-average across members
-```
+![Pipeline: DICOM, geometry normalisation, per-slice encoder, per-finding attention, 5-model ensemble; labels come from the reports](assets/pipeline.svg)
 
 **Geometry normalisation (+0.036 LB).**
 1. Order slices by physical position along the slice normal
@@ -115,20 +113,27 @@ taken 12.75 h — i.e. it would have scored nothing.
 
 ## 4. Progression
 
-| step | public LB |
-|---|---|
-| 64px thumbnails, 5 slices | 0.605 |
-| geometry normalisation | 0.669 |
-| DINOv2 features | 0.713 |
-| graded targets | 0.742 |
-| fine-tuned DINOv2 + attention head | 0.795 |
-| repaired multilingual labels | 0.827 |
-| public LLM labels | 0.870 |
-| + DINOv2-base, cross-architecture ensemble | 0.880 |
-| + RadImageNet ResNet-50 | 0.896 |
-| RadImageNet layer3+4 unfrozen, 4-model ensemble | 0.907 |
-| +10% data (released non-gold holdouts) | 0.908 |
-| 5-member ensemble without DINOv2-base | **0.910** |
+![Public and private score for each submission, rising from 0.605 to 0.910 public and 0.586 to 0.891 private; the winning private score of 0.960 is marked](assets/progression.svg)
+
+| step | public LB | private LB |
+|---|---|---|
+| 64px thumbnails, 5 slices | 0.605 | 0.586 |
+| geometry normalisation | 0.669 | 0.651 |
+| DINOv2 features | 0.713 | 0.691 |
+| graded targets | 0.742 | 0.710 |
+| fine-tuned DINOv2 + attention head | 0.795 | 0.765 |
+| repaired multilingual labels (Turkish) | 0.807 | 0.781 |
+| rules extractor v5 | 0.827 | 0.804 |
+| public LLM labels | 0.870 | 0.853 |
+| + DINOv2-base, cross-architecture ensemble | 0.880 | 0.868 |
+| + RadImageNet ResNet-50 | 0.896 | 0.880 |
+| RadImageNet layer3+4 unfrozen, 4-model ensemble | 0.907 | 0.888 |
+| +10% data (released non-gold holdouts) | 0.908 | 0.888 |
+| 5-member ensemble without DINOv2-base | **0.910** | **0.891** |
+
+Public and private moved together at every step (private sits 0.015–0.03
+lower throughout), so no change here was a public-LB overfit. Selecting
+members on gold-58 rather than on the public board is the likely reason.
 
 ## 5. What did not work — with numbers
 
@@ -172,6 +177,8 @@ Synovitis, 427 against 7. Raw-margin AUM under imbalanced BCE identifies hard
 rare positives, not label noise. (The margin was not prior-adjusted; a
 prior-corrected version might flag differently.)
 
+![Gold-58 AUC of every label source: nine that read the report fall between 0.79 and 0.90; the winning team's image-reading agent labels reach 0.936](assets/label_ceiling.svg)
+
 **Nine public label sources.** Every independent teacher scored ≤0.90 on gold,
 and no combination (Dawid–Skene, mean, rank-mean) got past 0.896. One public
 "label" dataset turned out to be the 58 gold labels re-uploaded — it scores a
@@ -209,11 +216,51 @@ failed to start, so it is **unmeasured**. It is included as code only.
   `slices_224_*` regardless of its real resolution. Shapes and headers are
   trustworthy; filenames are not.
 
-## 7. Where this pipeline stops, and what the stronger public ones do
+## 7. What the winners did, and what that says about this pipeline
 
-At writing, 5,207 teams; **1,016 sit at exactly 0.943**, which is a public
-notebook, and about 1,600 at ≥0.942. Reading the strongest public pipelines
-shows four differences from this one, none of which were tested here:
+The 1st-place solution (Team Kangaroo, 0.960 private;
+[write-up](https://www.kaggle.com/competitions/rsna-knee-abnormality-detection/writeups/1st-place-solution))
+made the same diagnosis this write-up did — 58 labels, reports capped near 0.90
+— and then **removed the ceiling instead of working under it**:
+
+- **Labels from LLM agents that read the images, not only the report.** One
+  agent session per study, with the report, overview images of each series,
+  and tools to view and zoom slices; the answer cites report quotes and image
+  evidence before giving a probability. These labels scored **0.936 on gold**,
+  against 0.893 for the best report-only source above.
+- **Agent-drawn boxes:** a 3D box per finding around the relevant anatomy, and
+  tight per-slice lesion boxes. A small detector predicts the anatomy boxes at
+  test time; each finding then pools features **only inside its own box**, from
+  a 112 mm crop of the joint at 384px.
+- **Every series as a training sample** (not one per plane), at 512px over a
+  140 mm field of view; ConvNeXt-T as the main backbone.
+- Auxiliary training-only targets (lesion coverage, the report's text
+  embedding), free at inference.
+
+Their own ablation is the decisive number: a plain per-slice ConvNeXt on their
+labels already scored **0.932 on gold**; all the box machinery together added
+about +0.011. **Most of the gap was labels.**
+
+**Corrections to this write-up's earlier conclusions.**
+
+1. *"The report labels are the ceiling"* — right as a diagnosis, wrong to treat
+   as fixed. The gold labels are image-derived, so the remedy was image-derived
+   labels at scale.
+2. An October draft of this section concluded the gap was "image side, not
+   labels". The winners' ablation shows the opposite: labels first, image-side
+   refinements second.
+3. **This pipeline never sent competition data to an external LLM**, on the
+   belief that the data terms forbade it. The rules explicitly allow paid LLMs
+   as tools (§6.b names a Gemini subscription as acceptable); the data-security
+   clause (§4.b) is ambiguous on API use, and the winning team used commercial
+   agents openly. That belief was never checked against the rules text — the
+   same pattern as running every submission on CPU for two months when the
+   rules allowed GPU (§6). **Read the actual rules in week one; a constraint
+   nobody verified is the most expensive kind.**
+
+What the strongest *public* notebooks did (most of the ~1,600 teams at
+≥0.942 public ran one of them) also differs from this pipeline on the image
+side, none of it tested here:
 
 1. **More MRI sequences.** One series per *slot* — plane × contrast × fat
    suppression, six slots — with each finding's attention seeded toward the
@@ -227,12 +274,12 @@ shows four differences from this one, none of which were tested here:
 4. **Very large ensembles of public weights,** made to fit in 9 h on 2×T4 by
    sharing identical encoder layers across members.
 
-The gold-58 results above say the report labels top out near 0.90 on gold. The
-leaderboard says models trained on similar labels reach 0.96 on test. Both can
-be true — gold-58 is 58 enriched studies, not the test distribution — but the
-practical reading is that this pipeline's gap is in the image side (sequences,
-slice coverage, resolution, backbone), not in the labels. That is the most
-useful thing this writeup can say to someone starting the same problem.
+**For someone starting the same problem:** measure the label ceiling first
+(it took two months here and was right), then spend effort on *raising* it —
+image-reading labellers, verified against the hand-labelled set by log loss and
+confident errors, not AUC alone — before tuning models. The measurement
+discipline in §2 and the negative results in §5 still hold; they were simply
+aimed at the second-largest lever.
 
 ## 8. Reproducibility
 
@@ -243,6 +290,11 @@ scripts are in this repository; competition data, derived labels and trained
 weights are not, because the competition rules do not allow redistributing
 them.
 
-Final selections: the 5-member ensemble without DINOv2-base (0.910) and the
-4-member ensemble with it (0.908), both run on GPU with predictions verified
-against their CPU versions to within 6×10⁻⁷.
+Final selections: the 5-member ensemble without DINOv2-base (0.910 public /
+**0.891 private**) and the 4-member ensemble with it (0.908 / 0.888), both run
+on GPU with predictions verified against their CPU versions to within 6×10⁻⁷.
+The hedge was the better pick on both boards.
+
+Figures are generated from the numbers in this document by
+`tools/make_figures.py`; no competition images are used anywhere, since the
+rules do not allow redistributing them.
